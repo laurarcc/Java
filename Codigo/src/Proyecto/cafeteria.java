@@ -9,9 +9,10 @@ public class cafeteria {
     // Declaración
     private JFrame frame;
     private JPanel panel;
-    private JButton regis, startSesion;
-    private JTextField textField; // x2
-    private JLabel label; // x2
+    private JButton regis, startSesion, sin_sesion;
+    private JTextField text;  // x2
+    private JLabel texto, info, eu; // x2
+    private FlowLayout flowLayout;
 
     public cafeteria() {
         primera_ventana();
@@ -20,18 +21,30 @@ public class cafeteria {
     public void primera_ventana() {
         //Crear frame
         frame = new JFrame();
-        frame.setTitle("Chisme y Café o Cuentamelo con un café");
+        frame.setTitle("Cuentamelo con un café");
+
+        flowLayout = new FlowLayout(FlowLayout.CENTER, 120, 10); // Espacios de 20 píxeles horizontalmente y 10 píxeles verticalmente
+
+        //Crear texto
+        texto = new JLabel("Bienvenido a Chisme y Café");
+        info = new JLabel("Si no está registrado es su momento para conseguir grandes descuentos en libros y comdia :)");
+        eu = new JLabel("Los libros/comics/mangas hasta un 10%, culpale a la España");
 
         //Crear panel
-        panel = new JPanel();
+        panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 5));
         panel.setBackground(new Color(0xF4CFC7));
 
         //Botones de registrarse e iniciar sesion
         regis = new JButton("Registrarse");
+        regis.setPreferredSize(new Dimension(150, 70)); //tamaño para los botonones
         startSesion = new JButton("Iniciar Sesión");
+        startSesion.setPreferredSize(new Dimension(150, 70)); //tamaño para los botonones
+        sin_sesion = new JButton("Continuar sin sesión");
+        sin_sesion.setPreferredSize(new Dimension(150, 70)); //tamaño para los botonones
 
         regis.setBackground(new Color(0xE79796));
         startSesion.setBackground(new Color(0xE79796));
+        sin_sesion.setBackground(new Color(0xE79796));
 
         //Action listener
         regis.addActionListener(new ActionListener() {
@@ -51,13 +64,21 @@ public class cafeteria {
 
         //Especificaciones del panel
         frame.setVisible(true);
-        frame.setBounds(200,200,600,600);
+        frame.setBounds(200,200,700,340);
+
+        //Texto
+        panel.add(texto);
+        panel.add(info);
+        panel.add(eu);
 
         //Botones al panel
         panel.add(regis);
         panel.add(startSesion);
+        panel.add(sin_sesion);
 
+        panel.setLayout(flowLayout);
         frame.add(panel);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -156,8 +177,12 @@ public class cafeteria {
                 if (comprobar) {
                     pedir();
                 } else {
-                    //Option pane de error
+                    showErrorDialog("La contraseña proporcionada es incorrecta.");
                 }
+            }
+
+            private void showErrorDialog(String s) {
+                JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
     }
