@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class cafeteria {
-    // Declaration
+    // Declaración
     private JFrame frame;
     private JPanel panel;
     private JButton regis, startSesion;
+    private JTextField textField; // x2
+    private JLabel label; // x2
 
     public cafeteria() {
         primera_ventana();
