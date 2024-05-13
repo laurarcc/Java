@@ -23,7 +23,8 @@ public class cafeteria {
         frame = new JFrame();
         frame.setTitle("Cuentamelo con un café");
 
-        flowLayout = new FlowLayout(FlowLayout.CENTER, 120, 10); // Espacios de 20 píxeles horizontalmente y 10 píxeles verticalmente
+        // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
+        flowLayout = new FlowLayout(FlowLayout.CENTER, 120, 10);
 
         //Crear texto
         texto = new JLabel("Bienvenido a Chisme y Café");
@@ -31,7 +32,7 @@ public class cafeteria {
         eu = new JLabel("Los libros/comics/mangas hasta un 10%, culpale a la España");
 
         //Crear panel
-        panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 5));
+        panel = new JPanel();
         panel.setBackground(new Color(0xF4CFC7));
 
         //Botones de registrarse e iniciar sesion
@@ -87,6 +88,9 @@ public class cafeteria {
         JFrame frameini = new JFrame();
         frameini.setTitle("Iniciar Sesión");
 
+        // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
+        flowLayout = new FlowLayout(FlowLayout.CENTER, 100, 10);
+
         //Crear panel
         JPanel panelini = new JPanel();
         panelini.setBackground(new Color(0xF4CFC7));
@@ -108,7 +112,7 @@ public class cafeteria {
         Boton_atras(atras);
 
         frameini.setVisible(true);
-        frameini.setBounds(200,200,600,600);
+        frameini.setBounds(200,200,300,300);
 
         panelini.add(ini);
         panelini.add(ini_text);
@@ -119,6 +123,7 @@ public class cafeteria {
         panelini.add(atras);
         panelini.add(cfm);
 
+        panelini.setLayout(flowLayout);
         frameini.add(panelini);
         frameini.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -127,6 +132,9 @@ public class cafeteria {
         //Crear frame
         JFrame framere  = new JFrame();
         frame.setTitle("Registrarse");
+
+        // Espacios de 100 píxeles horizontalmente y 10 píxeles verticalmente
+        flowLayout = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
         //Crear panel
         JPanel panere = new JPanel();
@@ -139,13 +147,36 @@ public class cafeteria {
         JLabel apellido = new JLabel("Introduzca el apellido");
         JTextField apellido_text = new JTextField(10);
 
+        JLabel contr_texto = new JLabel("Introduza la contraseña");
+        JPasswordField contr = new JPasswordField(10);
+
+        //Radios Button
         JRadioButton telefono = new JRadioButton("Telefono");
         JRadioButton email = new JRadioButton("Email");
+        ButtonGroup group = new ButtonGroup();
 
+        //agrupar radios button
+        group.add(telefono);
+        group.add(email);
+
+        //Action Listener
         telefono.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JLabel telefono = new JLabel("Introduzca su télefono movil");
+                JTextField telefono_text = new JTextField(20);
+                panere.add(telefono);
+                panere.add(telefono_text);
+            }
+        });
 
+        email.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JLabel email = new JLabel("Introduzca su e-mail");
+                JTextField email_text = new JTextField(50);
+                panere.add(email);
+                panere.add(email_text);
             }
         });
 
@@ -158,13 +189,24 @@ public class cafeteria {
         Boton_atras(atras);
 
         framere.setVisible(true);
-        framere.setBounds(200,200,600,600);
+        framere.setBounds(200,200,300,400);
+
+        panere.add(nombre);
+        panere.add(nombre_text);
+        panere.add(apellido);
+        panere.add(apellido_text);
+        panere.add(contr_texto);
+        panere.add(contr);
+        panere.add(telefono);
+        panere.add(email);
 
         panere.add(atras);
         panere.add(cfm);
 
+        panere.setLayout(flowLayout);
         framere.add(panere);
         framere.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        framere.setVisible(true);
     }
 
     private void boton_confirm(JButton cfm) {
@@ -206,7 +248,7 @@ public class cafeteria {
                 si.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        primera_ventana();
+                        primera_ventana(); //crea una nueva ventana (creo que es un problema)
                     }
                 });
 
