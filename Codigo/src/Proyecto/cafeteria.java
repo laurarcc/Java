@@ -28,11 +28,23 @@ public class cafeteria {
 
         //Crear texto
         texto = new JLabel("Bienvenido a Chisme y Café");
-        info = new JLabel("Si no está registrado es su momento para conseguir grandes descuentos en libros y comdia :)");
+        info = new JLabel("¡Aprovecha esta oportunidad para registrarte y conseguir grandes desucentos!");
         eu = new JLabel("Los libros/comics/mangas hasta un 10%, culpale a la España");
 
-        //Crear panel
-        panel = new JPanel();
+        texto.setFont(new Font("Serif", Font.PLAIN, 20));
+        info.setFont(new Font("Serif", Font.PLAIN, 20));
+        eu.setFont(new Font("Serif", Font.PLAIN, 20));
+
+        texto.setHorizontalAlignment(SwingConstants.CENTER);
+        info.setHorizontalAlignment(SwingConstants.CENTER);
+        eu.setHorizontalAlignment(SwingConstants.CENTER);
+
+        texto.setForeground(Color.WHITE);
+        info.setForeground(Color.WHITE);
+        eu.setForeground(Color.WHITE);
+
+        //Crear paneln con imagen fondo
+        panel = new ImagenPanel("./src/Proyecto/cafeteria.jpg");
         panel.setBackground(new Color(0xF4CFC7));
 
         //Botones de registrarse e iniciar sesion
@@ -65,7 +77,10 @@ public class cafeteria {
 
         //Especificaciones del panel
         frame.setVisible(true);
-        frame.setBounds(200,200,700,340);
+        frame.setBounds(200,200,730,340);
+
+        //Imagen
+
 
         //Texto
         panel.add(texto);
