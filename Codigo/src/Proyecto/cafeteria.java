@@ -4,13 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
+//usar un unico frame , remove de ventanas
 public class cafeteria {
     // Declaración
     private JFrame frame;
     private JPanel panel;
     private JButton regis, startSesion, sin_sesion;
-    private JTextField text;  // x2
     private JLabel texto, info, eu; // x2
     private FlowLayout flowLayout;
 
@@ -21,6 +23,7 @@ public class cafeteria {
     public void primera_ventana() {
         //Crear frame
         frame = new JFrame();
+        frame.setLocationRelativeTo(null);
         frame.setTitle("Cuentamelo con un café");
 
         // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
@@ -28,7 +31,7 @@ public class cafeteria {
 
         //Crear texto
         texto = new JLabel("Bienvenido a Chisme y Café");
-        info = new JLabel("¡Aprovecha esta oportunidad para registrarte y conseguir grandes desucentos!");
+        info = new JLabel("¡Aprovecha esta oportunidad para registrarte y conseguir grandes descuentos!");
         eu = new JLabel("Los libros/comics/mangas hasta un 10%, culpale a la España");
 
         texto.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -63,8 +66,8 @@ public class cafeteria {
         regis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //entrar a otra página con el botón
                 registrar_sesion();
+                panel.setVisible(false);
             }
         });
 
@@ -72,15 +75,23 @@ public class cafeteria {
             @Override
             public void actionPerformed(ActionEvent e) {
                 iniciar_sesion();
+                panel.setVisible(false);
+            }
+        });
+
+        sin_sesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pedir();
+                panel.setVisible(false);
             }
         });
 
         //Especificaciones del panel
         frame.setVisible(true);
-        frame.setBounds(200,200,730,340);
+        frame.setSize(730,340);
 
         //Imagen
-
 
         //Texto
         panel.add(texto);
@@ -99,11 +110,7 @@ public class cafeteria {
     }
 
     public void iniciar_sesion(){
-        //Crear frame
-        JFrame frameini = new JFrame();
-        frameini.setTitle("Iniciar Sesión");
-
-        // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
+        // Espacios de 100 píxeles horizontalmente y 10 píxeles verticalmente
         flowLayout = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
         //Crear panel
@@ -126,8 +133,8 @@ public class cafeteria {
         atras.setBackground(new Color(0xE79796));
         Boton_atras(atras);
 
-        frameini.setVisible(true);
-        frameini.setBounds(200,200,300,300);
+        frame.setVisible(true);
+        frame.setSize(300,300);
 
         panelini.add(ini);
         panelini.add(ini_text);
@@ -139,15 +146,10 @@ public class cafeteria {
         panelini.add(cfm);
 
         panelini.setLayout(flowLayout);
-        frameini.add(panelini);
-        frameini.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panelini);
     }
 
     public void registrar_sesion(){
-        //Crear frame
-        JFrame framere  = new JFrame();
-        frame.setTitle("Registrarse");
-
         // Espacios de 100 píxeles horizontalmente y 10 píxeles verticalmente
         flowLayout = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
@@ -165,63 +167,70 @@ public class cafeteria {
         JLabel contr_texto = new JLabel("Introduza la contraseña");
         JPasswordField contr = new JPasswordField(10);
 
-        //Radios Button
-        JRadioButton telefono = new JRadioButton("Telefono");
-        JRadioButton email = new JRadioButton("Email");
+        JLabel email = new JLabel("Introduzca el email");
+        JTextField email_text = new JTextField(10);
+
+        //Radio Button
+        JLabel info = new JLabel("¿Desea recibir información de las promociones?");
+        JRadioButton yes = new JRadioButton("Si");
+        JRadioButton no = new JRadioButton("No");
         ButtonGroup group = new ButtonGroup();
 
         //agrupar radios button
-        group.add(telefono);
-        group.add(email);
-
-        //Action Listener
-        telefono.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JLabel telefono = new JLabel("Introduzca su télefono movil");
-                JTextField telefono_text = new JTextField(20);
-                panere.add(telefono);
-                panere.add(telefono_text);
-            }
-        });
-
-        email.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JLabel email = new JLabel("Introduzca su e-mail");
-                JTextField email_text = new JTextField(50);
-                panere.add(email);
-                panere.add(email_text);
-            }
-        });
+        group.add(yes);
+        group.add(no);
 
         //Botón continuar o ir para atrás
-        JButton cfm = new JButton("Confirmar");
-        boton_confirm(cfm);
+        JButton cfm_regis= new JButton("Confirmar");
+        confirm_regis(cfm_regis);
 
         JButton atras = new JButton("Atrás");
         atras.setBackground(new Color(0xE79796));
         Boton_atras(atras);
 
-        framere.setVisible(true);
-        framere.setBounds(200,200,300,400);
+        frame.setVisible(true);
+        frame.setSize(300,400);
 
         panere.add(nombre);
         panere.add(nombre_text);
+
         panere.add(apellido);
         panere.add(apellido_text);
+
         panere.add(contr_texto);
         panere.add(contr);
-        panere.add(telefono);
+
         panere.add(email);
+        panere.add(email_text);
+
+        panere.add(info);
+        panere.add(yes);
+        panere.add(no);
 
         panere.add(atras);
-        panere.add(cfm);
+        panere.add(cfm_regis);
 
         panere.setLayout(flowLayout);
-        framere.add(panere);
-        framere.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        framere.setVisible(true);
+        frame.add(panere);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    private void confirm_regis(JButton cfmRegis) {
+        cfmRegis.setBackground(new Color(0xE79796));
+        cfmRegis.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               //Comprobar si el email ya está registrado en la BBDD
+               boolean comprobar = true;
+               if (comprobar){
+                   String mensaje = "Registrado satisfactoriamente";
+                   System.out.println(mensaje);
+               } else {
+                   showErrorDialog("Este email ya ha sido registrado");
+               }
+           }
+        });
     }
 
     private void boton_confirm(JButton cfm) {
@@ -237,22 +246,33 @@ public class cafeteria {
                     showErrorDialog("La contraseña proporcionada es incorrecta.");
                 }
             }
-
-            private void showErrorDialog(String s) {
-                JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);
-            }
         });
     }
 
+    private void showErrorDialog(String s) {
+        JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     public void pedir(){
+        JPanel pedir_panel = new JPanel();
+        pedir_panel.setSize(730,340);
         JLabel texto  = new JLabel("WIP");
+
+        //botones con bebidas e imagen
+
+
+
+        //Añadir cosas a panel
+        pedir_panel.add(texto);
+
+        //Añadir cosas al frame
+        frame.add(pedir_panel);
     }
 
     private void Boton_atras(JButton atras) {
         atras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frameatras = new JFrame();
                 JPanel panelatras = new JPanel();
                 panelatras.setBackground(new Color(0xE79796));
 
@@ -263,7 +283,8 @@ public class cafeteria {
                 si.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        primera_ventana(); //crea una nueva ventana (creo que es un problema)
+                        primera_ventana();
+                        panelatras.setVisible(false);
                     }
                 });
 
@@ -273,6 +294,7 @@ public class cafeteria {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         iniciar_sesion();
+                        panelatras.setVisible(false);
                     }
                 });
 
@@ -280,11 +302,11 @@ public class cafeteria {
                 panelatras.add(no);
                 panelatras.add(text);
 
-                frameatras.add(panelatras);
+                frame.add(panelatras);
 
-                frameatras.setVisible(true);
-                frameatras.setBounds(500,500,200,100);
-                frameatras.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+                frame.setSize(200,100);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });
     }
