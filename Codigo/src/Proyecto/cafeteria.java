@@ -241,6 +241,8 @@ public class cafeteria {
                 //Comprobar con la bbdd si es correcta la contraseña y usuario
                 boolean comprobar = true;
                 if (comprobar) {
+                    comprobaciones compro = new comprobaciones();
+                    compro.comprobación();
                     pedir();
                 } else {
                     showErrorDialog("La contraseña proporcionada es incorrecta.");
@@ -248,6 +250,8 @@ public class cafeteria {
             }
         });
     }
+
+
 
     private void showErrorDialog(String s) {
         JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);
