@@ -1,0 +1,20 @@
+*Usuario*
+-para iniciar sesion si falla puede intentarlo hasta un máximo de 3 veces, si falla se le borra
+la cuenta y crea una de nuevo (DELETE ALL usuario) (1 DELETE)
+
+-boton para gestionar cuenta, lo que conlleva a eliminar cuenta o cambiar contraseña, usuario o correo/telefono. (1 DELETE 3 UPDATE)
+-se le muestran las bebidas y los libros disponibles (2 SELECT) *
+
+*Adminmistrador*
+-puede eliminarse su cuenta tambien (1 DELETE)
+-puede eliminar(vetar) a algun cliente por mal comportamiento (1 DELETE)
+-puede administrar las bebidas cantidad (5 UPTADE = 5 BEBIDAS)
+-puede administrar los libros cantidad (5 UPTADE = 5 libros)
+-se le muestran cuantos libros quedan (cantidad + precio) en una matriz (1 SELECT)
+
+--> total de sentencias sql = 4 DELETE 13 UPDATE 3 SELECT (tienen que ser 5 de cada)
+
+* mirar esto porque no cuadra
+
+-Para lo de escribir en ficheros será hacer inventario de libros y bebidas que se hayan vendido en el dia
+(si se cierra la aplicación se reinicia)
