@@ -15,6 +15,8 @@ public class cafeteria {
     private JButton regis, startSesion, sin_sesion;
     private JLabel texto, info, eu; // x2
     private FlowLayout flowLayout;
+    private String clave = "1234";
+    private String nombre_admin = "pancracio";
 
     public cafeteria() {
         primera_ventana();
@@ -244,6 +246,11 @@ public class cafeteria {
                     comprobaciones compro = new comprobaciones();
                     compro.comprobación();
                     pedir();
+
+                    //la clave del administrador es una fija que va variando, es global y final
+                } else if (clave.equalsIgnoreCase("1234") && nombre_admin.equals("pancracio")) {
+                    administrador admin = new administrador();
+                    //¿como puede ir a la interfaz de admin?
                 } else {
                     showErrorDialog("La contraseña proporcionada es incorrecta.");
                 }
@@ -262,8 +269,10 @@ public class cafeteria {
         pedir_panel.setSize(730,340);
         JLabel texto  = new JLabel("WIP");
 
-        //botones con bebidas e imagen
-
+        /*Combo box que muestre las diferentes bebidas y se elige una
+        * tiene que seleccionar una si o si, si no le echa, después de
+        * elegir algo que tomar puede elegir si quiere libro o no, se le
+        * suma al precio final y paga en caja.*/
 
 
         //Añadir cosas a panel

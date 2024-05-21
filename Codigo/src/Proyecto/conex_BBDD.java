@@ -5,7 +5,7 @@ import java.sql.*;
 public class conex_BBDD {
     public static void main(String[] args) throws IOException {
         try{
-            Class.forName("com.mysql.jdbc.Driver"); //el error tiene que ver con esto
+            Class.forName("com.mysql.jdbc.Driver"); //el error tiene que ver con esto (preguntar)
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafeteria", "root", "");
             Statement sentence = conn.createStatement();
             ResultSet libros, bebidas;
