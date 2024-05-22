@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.*;
+import java.sql.*;
 
 //usar un unico frame , remove de ventanas
 public class cafeteria {
@@ -15,7 +17,6 @@ public class cafeteria {
     private JButton regis, startSesion, sin_sesion;
     private JLabel texto, info, eu; // x2
     private FlowLayout flowLayout;
-    private String clave = "1234";
     private String nombre_admin = "pancracio";
 
     public cafeteria() {
@@ -119,17 +120,13 @@ public class cafeteria {
         JPanel panelini = new JPanel();
         panelini.setBackground(new Color(0xF4CFC7));
 
-        //Crear iniciar sesion y password field
-        JLabel ini = new JLabel("Introduzca número de telfono o e-mail");
+        //Crear iniciar sesion
+        JLabel ini = new JLabel("Introduzca número de e-mail");
         JTextField ini_text = new JTextField(10);
-
-        JLabel passw_label = new JLabel("Introduzca su contraseña");
-        JPasswordField passw = new JPasswordField(10);
-        passw.setEchoChar('*');
 
         //Botón continuar o ir para atrás
         JButton cfm = new JButton("Confirmar");
-        boton_confirm(cfm);
+        boton_confirm(cfm, ini_text.getText().strip());
 
         JButton atras = new JButton("Atrás");
         atras.setBackground(new Color(0xE79796));
@@ -140,9 +137,6 @@ public class cafeteria {
 
         panelini.add(ini);
         panelini.add(ini_text);
-
-        panelini.add(passw_label);
-        panelini.add(passw);
 
         panelini.add(atras);
         panelini.add(cfm);
@@ -166,9 +160,6 @@ public class cafeteria {
         JLabel apellido = new JLabel("Introduzca el apellido");
         JTextField apellido_text = new JTextField(10);
 
-        JLabel contr_texto = new JLabel("Introduza la contraseña");
-        JPasswordField contr = new JPasswordField(10);
-
         JLabel email = new JLabel("Introduzca el email");
         JTextField email_text = new JTextField(10);
 
@@ -184,7 +175,7 @@ public class cafeteria {
 
         //Botón continuar o ir para atrás
         JButton cfm_regis= new JButton("Confirmar");
-        confirm_regis(cfm_regis);
+        confirm_regis(cfm_regis, email_text.getText());
 
         JButton atras = new JButton("Atrás");
         atras.setBackground(new Color(0xE79796));
@@ -198,9 +189,6 @@ public class cafeteria {
 
         panere.add(apellido);
         panere.add(apellido_text);
-
-        panere.add(contr_texto);
-        panere.add(contr);
 
         panere.add(email);
         panere.add(email_text);
@@ -218,16 +206,16 @@ public class cafeteria {
         frame.setVisible(true);
     }
 
-    private void confirm_regis(JButton cfmRegis) {
+    private void confirm_regis(JButton cfmRegis, String text) {
         cfmRegis.setBackground(new Color(0xE79796));
         cfmRegis.addActionListener(new ActionListener() {
            @Override
            public void actionPerformed(ActionEvent e) {
                //Comprobar si el email ya está registrado en la BBDD
-               boolean comprobar = true;
-               if (comprobar){
-                   String mensaje = "Registrado satisfactoriamente";
-                   System.out.println(mensaje);
+               if (text.equals(nombre_admin)){
+                   showErrorDialog("El email que desea registrar, ya está registrado");
+               } else if(usuario_registrado(text)) {
+                   System.out.println("Usuario registrado");
                } else {
                    showErrorDialog("Este email ya ha sido registrado");
                }
@@ -235,30 +223,66 @@ public class cafeteria {
         });
     }
 
-    private void boton_confirm(JButton cfm) {
+    private void boton_confirm(JButton cfm , String text) {
         cfm.setBackground(new Color(0xE79796));
         cfm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Comprobar con la bbdd si es correcta la contraseña y usuario
-                boolean comprobar = true;
-                if (comprobar) {
-                    comprobaciones compro = new comprobaciones();
-                    compro.comprobación();
-                    pedir();
-
-                    //la clave del administrador es una fija que va variando, es global y final
-                } else if (clave.equalsIgnoreCase("1234") && nombre_admin.equals("pancracio")) {
-                    administrador admin = new administrador();
-                    //¿como puede ir a la interfaz de admin?
+                //Comprobar con la bbdd si es correcto el email
+                if (text.equals(nombre_admin)) {
+                    administrador admin = new administrador(nombre_admin);
+                    new administrador(admin);
+                    //usuario
+                } else if (usuario_registrado(text)) {
+                    System.out.println("Ta bueno");
                 } else {
-                    showErrorDialog("La contraseña proporcionada es incorrecta.");
+                    showErrorDialog("El email proporcionado es incorrecta.");
                 }
             }
         });
     }
 
+    /**
+     * Comprobamos que el usuario esté registrado en la base de datos
+     * @param text es el email que se le pasa para comprobar a dicho usuario
+     * @return false o true según se requiera
+     */
+    private boolean usuario_registrado(String text) {
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafeteria", "root", "");
+            Statement sentence = conn.createStatement();
+            ResultSet usuario;
 
+            File fichin = new File("./Codigo/src/Proyecto/consultas.txt");
+            BufferedReader br = new BufferedReader(new FileReader(fichin));
+
+            //consulta
+            String linea = br.readLine(); //porque es la primera linea, si es la segunda es un while
+            usuario = sentence.executeQuery(linea);
+            while (usuario.next()) {
+                String reg = usuario.getString("EMAIL");
+                if(reg.equals(text)){
+                    return true;
+                }
+            }
+
+            br.close();
+            conn.close();
+
+        }catch (ClassNotFoundException e) {
+            System.out.println("Error al cargar el driver JDBC.");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Error al conectar a la base de datos.");
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 
     private void showErrorDialog(String s) {
         JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);

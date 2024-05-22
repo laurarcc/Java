@@ -5,7 +5,7 @@ import java.sql.*;
 public class conex_BBDD {
     public static void main(String[] args) throws IOException {
         try{
-            Class.forName("com.mysql.jdbc.Driver"); //el error tiene que ver con esto (preguntar)
+            Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cafeteria", "root", "");
             Statement sentence = conn.createStatement();
             ResultSet libros, bebidas;
@@ -18,8 +18,9 @@ public class conex_BBDD {
             }
 
             //Fichero que almacena las sentencias
-            File fichout = new File("./src/almacen.txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fichout));
+            File fichout = new File("./Codigo/src/Proyecto/almacen.txt");
+            FileWriter fw = new FileWriter(fichout);
+            BufferedWriter bw = new BufferedWriter(fw);
 
             //Si el fichero no existe se crea
             if(!fichout.exists()){
@@ -45,6 +46,7 @@ public class conex_BBDD {
             }
 
             bw.close();
+            conn.close();
 
         }catch (ClassNotFoundException e) {
             System.out.println("Error al cargar el driver JDBC.");
@@ -54,5 +56,6 @@ public class conex_BBDD {
             e.printStackTrace();
         }
     }
+
 
     }
