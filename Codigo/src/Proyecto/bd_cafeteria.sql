@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS cafeteria;
-CREATE DATABASE cafeteria;
-USE cafeteria;
+DROP DATABASE IF EXISTS mainCafeteria;
+CREATE DATABASE mainCafeteria;
+USE mainCafeteria;
 
 /*Tabla que registrará a los usuarios y entrarán a la base de datos*/
 CREATE TABLE IF NOT EXISTS USUARIO (
