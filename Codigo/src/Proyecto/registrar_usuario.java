@@ -7,10 +7,10 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.*;
 
-public class registrar_usuario {
+public class registrar_usuario extends JFrame {
     private String nombre_admin = "pancracio";
-    JFrame frame = new JFrame();
-    public void registrar_usuario(){
+    static registrar_usuario registro;
+    public registrar_usuario(){
         // Espacios de 100 píxeles horizontalmente y 10 píxeles verticalmente
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 100, 10);
 
@@ -48,15 +48,14 @@ public class registrar_usuario {
         atras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainCafeteria caf = new mainCafeteria();
-                new mainCafeteria();
-                panere.setVisible(false);
+                new ventana_inicio();
+                registro.dispose();
             }
         });
 
 
-        frame.setVisible(true);
-        frame.setSize(300,400);
+        setVisible(true);
+        setSize(300,400);
 
         panere.add(nombre);
         panere.add(nombre_text);
@@ -75,9 +74,10 @@ public class registrar_usuario {
         panere.add(cfm_regis);
 
         panere.setLayout(flowLayout);
-        frame.add(panere);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        add(panere);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        registro = this;
     }
 
     private void confirm_regis(JButton cfmRegis, String text) {

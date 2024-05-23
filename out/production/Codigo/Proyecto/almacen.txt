@@ -1,0 +1,64 @@
+1
+Bubble Tea Clásico
+Bubble Tea
+4.50
+2
+Bubble Tea de Taro
+Bubble Tea
+5.00
+3
+Bubble Tea de Matcha
+Bubble Tea
+5.50
+4
+Café Latte
+Café
+3.75
+5
+Té Verde
+Té
+2.50
+6
+Smoothie de Fresa
+Smoothie
+4.00
+1
+Cien Años de Soledad
+Gabriel García Márquez
+10
+2
+Don Quijote de la Mancha
+Miguel de Cervantes
+5
+3
+La Sombra del Viento
+Carlos Ruiz Zafón
+8
+4
+El Amor en los Tiempos del Cólera
+Gabriel García Márquez
+6
+5
+La Casa de los Espíritus
+Isabel Allende
+7
+6
+Rayuela
+Julio Cortázar
+12
+7
+Crónica de una Muerte Anunciada
+Gabriel García Márquez
+9
+8
+El Aleph
+Jorge Luis Borges
+4
+9
+Ficciones
+Jorge Luis Borges
+6
+10
+Pedro Páramo
+Juan Rulfo
+11

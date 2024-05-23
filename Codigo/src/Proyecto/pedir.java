@@ -2,9 +2,9 @@ package Proyecto;
 
 import javax.swing.*;
 
-public class pedir {
+public class pedir extends JFrame {
     JFrame frame;
-    public void pedir(){
+    public pedir(){
         JPanel pedir_panel = new JPanel();
         pedir_panel.setSize(730,340);
         JLabel texto  = new JLabel("WIP");

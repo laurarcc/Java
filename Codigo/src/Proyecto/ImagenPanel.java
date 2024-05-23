@@ -2,12 +2,13 @@ package Proyecto;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class ImagenPanel extends JPanel {
     private Image image;
 
-    public ImagenPanel(String path) {
-        this.image = new ImageIcon(getClass().getResource("cafeteria.jpg")).getImage();
+    public ImagenPanel() {
+        this.image = new ImageIcon(Objects.requireNonNull(getClass().getResource("cafeteria.jpg"))).getImage();
     }
 
     @Override

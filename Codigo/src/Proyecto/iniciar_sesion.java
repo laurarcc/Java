@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.*;
 
-public class iniciar_sesion extends ventana_inicio {
+public class iniciar_sesion extends JFrame {
     private String nombre_admin = "pancracio";
     JFrame frame = new JFrame();
     public iniciar_sesion(){
@@ -32,7 +32,6 @@ public class iniciar_sesion extends ventana_inicio {
         atras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ventana_inicio ventana_inicio = new ventana_inicio();
                 new ventana_inicio();
             }
         });

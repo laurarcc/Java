@@ -6,22 +6,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //hacer métodos de las interfaces a lo mejor es mas llevadero
-public class ventana_inicio {
+public class ventana_inicio extends JFrame  {
     // Declaración
-    private JFrame frame;
     private JPanel panel;
     private JButton regis, startSesion, sin_sesion;
     private JLabel texto, info, eu; // x2
     private FlowLayout flowLayout;
 
-    public void ventana_inicio() {
-        //Crear frame
-        frame = new JFrame();
-        frame.setLocationRelativeTo(null);
-        frame.setTitle("Cuéntamelo con un café");
+    static ventana_inicio ventana_inicio;
 
-        // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
-        flowLayout = new FlowLayout(FlowLayout.CENTER, 120, 10);
+    public ventana_inicio() {
+        //Panel
+        panel = new JPanel();
+
+        //Crear frame
+        setLocationRelativeTo(null);
+        setBounds(new Rectangle(700,500));
+        setTitle("Cuéntamelo con un café");
+
+        //Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
+        flowLayout = new FlowLayout(FlowLayout.CENTER, 50, 10);
 
         //Crear texto
         texto = new JLabel("Bienvenido a Chisme y Café");
@@ -41,7 +45,7 @@ public class ventana_inicio {
         eu.setForeground(Color.WHITE);
 
         //Crear paneln con imagen fondo
-        panel = new ImagenPanel("./src/Proyecto/cafeteria.jpg");
+        //panel = new ImagenPanel("./src/Proyecto/cafeteria.jpg");
         panel.setBackground(new Color(0xF4CFC7));
 
         //Botones de registrarse e iniciar sesion
@@ -60,33 +64,30 @@ public class ventana_inicio {
         regis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registrar_usuario reg = new registrar_usuario();
                 new registrar_usuario();
-                panel.setVisible(false);
+                ventana_inicio.dispose();
             }
         });
 
         startSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                iniciar_sesion ini = new iniciar_sesion();
                 new iniciar_sesion();
-                panel.setVisible(false);
+                ventana_inicio.dispose();
             }
         });
 
         sin_sesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pedir pedir = new pedir();
                 new pedir();
-                panel.setVisible(false);
+                ventana_inicio.dispose();
             }
         });
 
         //Especificaciones del panel
-        frame.setVisible(true);
-        frame.setSize(730,340);
+        setVisible(true);
+        panel.setVisible(true);
 
         //Imagen
 
@@ -101,8 +102,10 @@ public class ventana_inicio {
         panel.add(sin_sesion);
 
         panel.setLayout(flowLayout);
-        frame.add(panel);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(panel);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana_inicio = this;
     }
+
 }
