@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//hacer métodos de las interfaces a lo mejor es mas llevadero
 public class ventana_inicio {
     // Declaración
     private JFrame frame;
@@ -13,11 +14,11 @@ public class ventana_inicio {
     private JLabel texto, info, eu; // x2
     private FlowLayout flowLayout;
 
-    public void ventana_inicio(JFrame frame) {
+    public void ventana_inicio() {
         //Crear frame
         frame = new JFrame();
         frame.setLocationRelativeTo(null);
-        frame.setTitle("Cuentamelo con un café");
+        frame.setTitle("Cuéntamelo con un café");
 
         // Espacios de 120 píxeles horizontalmente y 10 píxeles verticalmente
         flowLayout = new FlowLayout(FlowLayout.CENTER, 120, 10);

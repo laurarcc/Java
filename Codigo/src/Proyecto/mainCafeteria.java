@@ -1,14 +1,13 @@
 package Proyecto;
 
 public class mainCafeteria {
-
+    //hacer métodos de las interfaces a lo mejor es mas llevadero
     public mainCafeteria() {
-        ventana_inicio ventana = new ventana_inicio();
         new ventana_inicio();
     }
 
     public static void main(String[] args) {
-        mainCafeteria mainCafeteria = new mainCafeteria();
+        new mainCafeteria();
     }
 
 }

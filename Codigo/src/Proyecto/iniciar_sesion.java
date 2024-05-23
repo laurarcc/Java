@@ -116,7 +116,4 @@ public class iniciar_sesion extends ventana_inicio {
         JOptionPane.showMessageDialog(null, s, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-
-
-
 }
